@@ -1,16 +1,33 @@
-let sketch = function (p) {
-    let x = 100;
-    let y = 100;
+let drumrollSketch = function (p5) {
 
-    p.setup = function () {
-        p.createCanvas(700, 410);
+    p5.centerCanvas = function () {
+        p5.centerX = (p5.windowWidth - p5.width) / 2;
+        p5.centerY = (p5.windowHeight - p5.height) / 2;
+        p5.cnv.position(p5.centerX, p5.centerY);
+    } 
+
+    p5.setup = function () {
+        p5.cnv = p5.createCanvas(100, 100);
+        let canvasWidth = p5.windowWidth * .9;
+        let canvasHeight = p5.windowHeight * .7;
+        p5.resizeCanvas(canvasWidth, canvasHeight);
+        p5.centerCanvas();
     };
 
-    p.draw = function () {
-        p.background(0);
-        p.fill(255);
-        p.rect(x, y, 50, 50);
+    p5.draw = function () {
+        p5.background(0);
+        p5.fill(255);
+        p5.rect(0, 0, 50, 50);
     };
+
+    p5.windowResized = function () {
+        let canvasWidth = p5.windowWidth * .9;
+        let canvasHeight = p5.windowHeight * .7;
+        p5.resizeCanvas(canvasWidth, canvasHeight);
+        p5.centerCanvas();
+    };
+
+
 };
 
-let myp5 = new p5(sketch);
+let drumroll = new p5(drumrollSketch, 'drumroll');
