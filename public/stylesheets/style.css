@@ -1,9 +1,11 @@
 body {
     background-color: #222222 !important;
     padding: 50px;
-    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    font: Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace;
 }
 
 a {
-  color: #00B7FF;
+    color: white;
+    font-family: Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace;
+    text-decoration: none;
 }
