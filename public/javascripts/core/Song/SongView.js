@@ -11,7 +11,7 @@ export default class SongView {
         this.songViewContainerWidth = this.gameManager.p5.canvasWidth * 0.9;
         this.songViewContainerHeight = this.gameManager.p5.canvasHeight * 0.2;
         this.songViewContainerOffsetX = (this.gameManager.p5.canvasWidth - this.songViewContainerWidth) / 2.0;
-        this.songViewContainerOffsetY = this.gameManager.p5.canvasHeight * 0.1;
+        this.songViewContainerOffsetY = this.gameManager.p5.canvasHeight * 0.01;
     
     }
 
@@ -19,7 +19,7 @@ export default class SongView {
         this.songViewContainerWidth = this.gameManager.p5.canvasWidth * 0.9;
         this.songViewContainerHeight = this.gameManager.p5.canvasHeight * 0.2;
         this.songViewContainerOffsetX = (this.gameManager.p5.canvasWidth - this.songViewContainerWidth) / 2.0;
-        this.songViewContainerOffsetY = this.gameManager.p5.canvasHeight * 0.1;
+        this.songViewContainerOffsetY = this.gameManager.p5.canvasHeight * 0.01;
     }
 
     render() {

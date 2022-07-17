@@ -1,5 +1,7 @@
 import GameManager from "./core/GameManager.js";
 import SongView from "./core/Song/SongView.js";
+import TrackView from "./core/Track/TrackView.js";
+import InstrumentView from "./core/Instrument/InstrumentView.js";
 
 //Create game manager
 let gameManager = new GameManager(); 
@@ -16,6 +18,7 @@ let drumrollSketch = function (p5) {
 
     //View Components
     p5.songView = {};
+    p5.trackView = {};
 
     p5.centerCanvas = function () {
         //offset by half of canvas vs window
@@ -37,14 +40,25 @@ let drumrollSketch = function (p5) {
         //Initialize SongView
         p5.songView = new SongView();
         p5.songView.render();
+
+        //Initialize TrackView
+        p5.trackView = new TrackView();
+        p5.trackView.render();
+
+        //Initialize InstrumentView
+        p5.instrumentView = new InstrumentView();
+        p5.instrumentView.render();
     };
 
     p5.draw = function () {
         //render background
         p5.background(GameManager.instance.backgroundColor);
-        //render song/transport view
+        //render song/transport window
         p5.songView.render();
-
+        //render track window
+        p5.trackView.render();
+        //render instrument window
+        p5.instrumentView.render();
         
     };
 
@@ -55,6 +69,7 @@ let drumrollSketch = function (p5) {
         p5.centerCanvas();
         //resize components
         p5.songView.windowResized();
+        p5.trackView.windowResized();
     };
 
     p5.mouseClicked = async function() {
@@ -128,7 +143,7 @@ Tone.loaded().then(() => {
   }, beatOneOfEachMeasure, "16n").start("0:0:0")
 
   // Uncomment this if you want to hear every sixteenth note played
-  // new Tone.Sequence((time, note) => {
-  //   sampler.triggerAttackRelease(note, "64n", time);
-  // }, everySixteenthNote, "16n").start("0:0:0")
+   new Tone.Sequence((time, note) => {
+     sampler.triggerAttackRelease(note, "64n", time);
+   }, everySixteenthNote, "16n").start("0:0:0")
 });
