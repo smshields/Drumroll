@@ -7,6 +7,11 @@ let gameManager = new GameManager();
 let drumrollSketch = function (p5) {
 
     p5.drumrollModel = {};
+    p5.centerX = {};
+    p5.centerY = {};
+    p5.cnv = {};
+    p5.canvasWidth = {};
+    p5.canvasHeight = {};
 
     p5.centerCanvas = function () {
         p5.centerX = (p5.windowWidth - p5.width) / 2;
@@ -16,11 +21,11 @@ let drumrollSketch = function (p5) {
 
     p5.setup = function () {
         p5.cnv = p5.createCanvas(100, 100);
-        let canvasWidth = p5.windowWidth * .9;
-        let canvasHeight = p5.windowHeight * .7;
-        p5.resizeCanvas(canvasWidth, canvasHeight);
+        p5.canvasWidth = p5.windowWidth * .9;
+        p5.canvasHeight = p5.windowHeight * .7;
+        p5.resizeCanvas(p5.canvasWidth, p5.canvasHeight);
         p5.centerCanvas();
-        p5.background(34, 34, 34);
+        p5.background(GameManager.instance.backgroundColor);
     };
 
     p5.draw = function () {

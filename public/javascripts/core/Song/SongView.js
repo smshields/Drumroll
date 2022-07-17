@@ -8,5 +8,8 @@ export default class SongView {
             
     }
 
+    render() {
+         
+    }
 
 }
