@@ -86,6 +86,7 @@ gameManager.transport = Tone.Transport;
 gameManager.transport.loop = true;
 gameManager.transport.loopStart = "0:0:0";
 gameManager.transport.loopEnd = "16:0:0";
+gameManager.transport.bpm.value = "120"
 gameManager.transport.schedule((time) => {
   console.log(`${time}: starting song`)
 }, "0:0:0");
@@ -104,16 +105,30 @@ const sampler = new Tone.Sampler({
 
 // Wait for samples to load...
 Tone.loaded().then(() => {
-  
-  const emptySequenceArray = [].fill(null, 64);
-  let someSequenceArray = emptySequenceArray;
-  someSequenceArray[0] = "Eb4";
-  someSequenceArray[15] = "Eb4";
-  someSequenceArray[31] = "Eb4";
-  someSequenceArray[47] = "Eb4";
+  // Define a 1,024 sequence representing each sixteenth note in 16 measures of 4/4
+  // Play a note on the one of each measure (every 16th element)
+  let beatOneOfEachMeasure = [];
+  for (let i = 0; i < 1024; i++) {
+    if (i % 16 === 0) {
+      beatOneOfEachMeasure[i] = "A4";
+    } else {
+      beatOneOfEachMeasure[i] = null;
+    }
+  }
+  console.log(beatOneOfEachMeasure)
+
+  // Play a lower note for every sixteenth note
+  let everySixteenthNote = new Array(1024).fill("C4", 0, 1024);
+  console.log(everySixteenthNote)
+
+  // Add the sequences to the Tone Transport
+  // "16n" means that each element represents a sixteenth note
   const sampleSeq = new Tone.Sequence((time, note) => {
     sampler.triggerAttackRelease(note, 0.1, time);
-    // sequences are defined as 64 beat arrays
-  }, someSequenceArray).start("0:0:0")
+  }, beatOneOfEachMeasure, "16n").start("0:0:0")
 
+  // Uncomment this if you want to hear every sixteenth note played
+  // new Tone.Sequence((time, note) => {
+  //   sampler.triggerAttackRelease(note, "64n", time);
+  // }, everySixteenthNote, "16n").start("0:0:0")
 });
