@@ -2,6 +2,8 @@ import GameManager from "./core/GameManager.js";
 import SongView from "./core/Song/SongView.js";
 import TrackView from "./core/Track/TrackView.js";
 import InstrumentView from "./core/Instrument/InstrumentView.js";
+import Song from "./core/Song/Song.js";
+import Track from "./core/Track/Track.js";
 
 //Create game manager
 let gameManager = new GameManager(); 
@@ -100,10 +102,11 @@ gameManager.transport = Tone.Transport;
 
 //TODO: Model initialization
 //TODO: Move to constants somewhere
+//TODO: need to make sure looping is smooth
 gameManager.transport.loop = true;
 gameManager.transport.loopStart = "0:0:0";
-gameManager.transport.loopEnd = "16:0:0";
-gameManager.transport.bpm.value = "120"
+gameManager.transport.loopEnd = "16:0:0"; // TODO: use gameManager.totalMeasures:0:0
+gameManager.transport.bpm.value = gameManager.bpm
 gameManager.transport.schedule((time) => {
   console.log(`${time}: starting song`)
 }, "0:0:0");
@@ -145,7 +148,13 @@ Tone.loaded().then(() => {
   }, beatOneOfEachMeasure, "16n").start("0:0:0")
 
   // Uncomment this if you want to hear every sixteenth note played
-   new Tone.Sequence((time, note) => {
-     sampler.triggerAttackRelease(note, "64n", time);
-   }, everySixteenthNote, "16n").start("0:0:0")
+  // new Tone.Sequence((time, note) => {
+  //   sampler.triggerAttackRelease(note, "64n", time);
+  // }, everySixteenthNote, "16n").start("0:1:0")
+
+  const s = new Song();
+  const t = new Track(new Array(256).fill("D5"), 1, sampler)
+  s.addTrack(t);
+  const t1 = new Track(new Array(256).fill("F#3"), 2, sampler)
+  s.addTrack(t1);
 });

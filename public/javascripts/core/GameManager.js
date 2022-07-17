@@ -20,12 +20,20 @@ export default class GameManager {
         this.canvas = {}; //P5 Canvas
         this.tone = {}; //Tone Reference
 
-        //Important Globals
+        //Important Globals: Colors
         this.backgroundColor = 0;
         this.lowContrast = '';
         this.medContrast = '';
         this.highContrast = '';
         this.maxContrast = '';
         this.white = '';
+        
+        //Important Globals: Tone.js params
+        this.bpm = 80;
+        this.totalMeasures = 16;
+        this.beatsPerMeasure = 4;
+        this.totalSixteenthNotes = this.totalMeasures * this.beatsPerMeasure * 16;
+        this.subdivisions = 4; // Determines how big a track may be
+    
     }
 }
