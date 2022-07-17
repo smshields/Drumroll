@@ -22,5 +22,9 @@ export default class GameManager {
 
         //Important Globals
         this.backgroundColor = 0;
+        this.lowContrast = '';
+        this.medContrast = '';
+        this.highContrast = '';
+        this.maxContrast = '';
     }
 }
