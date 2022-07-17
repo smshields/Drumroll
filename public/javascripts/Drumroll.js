@@ -49,6 +49,8 @@ let drumrollSketch = function (p5) {
 gameManager.p5 = new p5(drumrollSketch, 'drumroll');
 gameManager.canvas = p5.cnv;
 gameManager.backgroundColor = '#222222';
+gameManager.transport = Tone.Transport;
+console.log(gameManager.transport);
 
 
 //TODO: Model initialization

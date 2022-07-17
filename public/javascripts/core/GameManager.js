@@ -18,6 +18,7 @@ export default class GameManager {
         this.instance = {}; //GameSession
         this.p5 = {}; //P5 instance
         this.canvas = {}; //P5 Canvas
+        this.tone = {}; //Tone Reference
 
         //Important Globals
         this.backgroundColor = 0;
