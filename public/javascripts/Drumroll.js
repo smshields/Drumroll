@@ -70,6 +70,7 @@ let drumrollSketch = function (p5) {
         //resize components
         p5.songView.windowResized();
         p5.trackView.windowResized();
+        p5.instrumentView.windowResized();
     };
 
     p5.mouseClicked = async function() {

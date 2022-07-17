@@ -19,6 +19,8 @@ export default class SongView {
         this.playHeadStartX = (this.gameManager.p5.canvasWidth - this.playHeadWidth) / 2.0;
         this.playHeadStartY = this.playHeadEndY = this.songViewContainerOffsetY + (this.songViewContainerHeight/2.0);
         this.playHeadEndX = this.playHeadStartX + this.playHeadWidth;
+
+        //TODO: Tick marks for measures and tracks
     
     }
 
@@ -52,7 +54,18 @@ export default class SongView {
         this.gameManager.p5.strokeWeight(2);
         this.gameManager.p5.line(this.playHeadStartX, this.playHeadStartY, this.playHeadEndX, this.playHeadEndY);
 
-        //Playhead - where the playback currently is
+        //needle - where the playback currently is
+        this.gameManager.p5.stroke(this.gameManager.white);
+        this.gameManager.p5.strokeWeight(3);
+        let needleX = (this.gameManager.transport.progress * this.playHeadWidth) + this.playHeadStartX;
+        console.log(needleX);
+        this.gameManager.p5.line(
+            needleX,
+            this.playHeadStartY + 5.0,
+            needleX,
+            this.playHeadStartY - 5.0
+        );
+        
     }
 
 }
