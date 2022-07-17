@@ -26,5 +26,6 @@ export default class GameManager {
         this.medContrast = '';
         this.highContrast = '';
         this.maxContrast = '';
+        this.white = '';
     }
 }

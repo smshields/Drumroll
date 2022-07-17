@@ -88,6 +88,7 @@ gameManager.canvas = p5.cnv;
 
 //Establish color scheme for game
 gameManager.backgroundColor = '#222222';
+gameManager.white = '#ffffff';
 gameManager.lowContrast = '#000272';
 gameManager.medContrast = '#341677';
 gameManager.highContrast = '#A32F80';
