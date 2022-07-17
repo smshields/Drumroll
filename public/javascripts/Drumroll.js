@@ -80,21 +80,30 @@ const sampler = new Tone.Sampler({
 
 // Wait for samples to load...
 Tone.loaded().then(() => {
-  // Define a 256 sequence representing each sixteenth note in 16 bars
-  // Play a note each downbeat (every 16th element)
-  let someSequenceArray = [];
-  for (let i = 0; i <= 256; i++) {
+  // Define a 1,024 sequence representing each sixteenth note in 16 measures of 4/4
+  // Play a note on the one of each measure (every 16th element)
+  let beatOneOfEachMeasure = [];
+  for (let i = 0; i < 1024; i++) {
     if (i % 16 === 0) {
-      someSequenceArray[i] = "Eb4";
+      beatOneOfEachMeasure[i] = "A4";
     } else {
-      someSequenceArray[i] = null;
+      beatOneOfEachMeasure[i] = null;
     }
   }
-  console.log(someSequenceArray)
+  console.log(beatOneOfEachMeasure)
 
-  // Add the sequence to the Tone Transport
+  // Play a lower note for every sixteenth note
+  let everySixteenthNote = new Array(1024).fill("C4", 0, 1024);
+  console.log(everySixteenthNote)
+
+  // Add the sequences to the Tone Transport
   // "16n" means that each element represents a sixteenth note
   const sampleSeq = new Tone.Sequence((time, note) => {
     sampler.triggerAttackRelease(note, 0.1, time);
-  }, someSequenceArray, "16n").start("0:0:0")
+  }, beatOneOfEachMeasure, "16n").start("0:0:0")
+
+  // Uncomment this if you want to hear every sixteenth note played
+  // new Tone.Sequence((time, note) => {
+  //   sampler.triggerAttackRelease(note, "64n", time);
+  // }, everySixteenthNote, "16n").start("0:0:0")
 });
