@@ -61,6 +61,7 @@ console.log(gameManager.transport);
 gameManager.transport.loop = true;
 gameManager.transport.loopStart = "0:0:0";
 gameManager.transport.loopEnd = "16:0:0";
+gameManager.transport.bpm.value = "120"
 gameManager.transport.schedule((time) => {
   console.log(`${time}: starting song`)
 }, "0:0:0");
@@ -79,16 +80,21 @@ const sampler = new Tone.Sampler({
 
 // Wait for samples to load...
 Tone.loaded().then(() => {
-  
-  const emptySequenceArray = [].fill(null, 64);
-  let someSequenceArray = emptySequenceArray;
-  someSequenceArray[0] = "Eb4";
-  someSequenceArray[15] = "Eb4";
-  someSequenceArray[31] = "Eb4";
-  someSequenceArray[47] = "Eb4";
+  // Define a 256 sequence representing each sixteenth note in 16 bars
+  // Play a note each downbeat (every 16th element)
+  let someSequenceArray = [];
+  for (let i = 0; i <= 256; i++) {
+    if (i % 16 === 0) {
+      someSequenceArray[i] = "Eb4";
+    } else {
+      someSequenceArray[i] = null;
+    }
+  }
+  console.log(someSequenceArray)
+
+  // Add the sequence to the Tone Transport
+  // "16n" means that each element represents a sixteenth note
   const sampleSeq = new Tone.Sequence((time, note) => {
     sampler.triggerAttackRelease(note, 0.1, time);
-    // sequences are defined as 64 beat arrays
-  }, someSequenceArray).start("0:0:0")
-
+  }, someSequenceArray, "16n").start("0:0:0")
 });
